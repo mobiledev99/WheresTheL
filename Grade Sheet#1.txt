@@ -1,0 +1,12 @@
+Product backlog and sprint backlog are on Scrumy.com: 10/10
+Use at least three screens: 10/10
+Use at least two unique layouts: 10/10
+Use at least two simple views: 10/10
+Use at least one complex or data driven views: 10/10
+Proper use of intent and bundle: 10/10
+Menu is present and allows navigation among screens: 5/10
+All String literals are in strings.xml. 10/10
+Source code has proper documentation/JavaDoc. Source code follows proper Java naming
+conventions, and is in good form: 10/10
+Do something extra beyond the minimum requirements stated here: 10/10
+What did you do? Use fragments, orientation change, scrolling, RadioGroup, custom list items
