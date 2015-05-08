@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="numLinesTwo">2</integer>
+    <integer name="numLinesThree">3</integer>
+    <integer name="ems12">12</integer>
+</resources>

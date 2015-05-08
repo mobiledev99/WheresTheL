@@ -1,0 +1,127 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sixteen_dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesTwo"
+            android:text="@string/lbl_direction"
+            android:id="@+id/lblDirection"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesTwo"
+            android:id="@+id/tvDirection"
+            android:text="@string/blank"
+            android:layout_weight="3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sixteen_dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesThree"
+            android:text="@string/lbl_stopname"
+            android:id="@+id/lblStopName"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesThree"
+            android:text="@string/blank"
+            android:id="@+id/tvStopName"
+            android:layout_weight="3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sixteen_dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesThree"
+            android:text="@string/lbl_stationname"
+            android:id="@+id/lblStationName"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesThree"
+            android:text="@string/blank"
+            android:id="@+id/tvStationName"
+            android:layout_weight="3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sixteen_dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesThree"
+            android:text="@string/lbl_stationdescription"
+            android:id="@+id/lblStationDescription"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesThree"
+            android:text="@string/blank"
+            android:id="@+id/tvStationDescription"
+            android:layout_weight="3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sixteen_dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_mapstation"
+            android:id="@+id/btnMapStation"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_getdirections"
+            android:id="@+id/btnGetDirections"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

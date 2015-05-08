@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Where\'s The L?</string>
+
+    <string name="chicago_city">Chicago!</string>
+    <string name="action_settings">Settings</string>
+    <string name="rb_direction">Which way do you want to go?</string>
+    <string name="rb_north">N</string>
+    <string name="rb_south">S</string>
+    <string name="rb_east">E</string>
+    <string name="rb_west">W</string>
+    <string name="spn_distance">Distance To L</string>
+    <string name="spinner_prompt">Distance</string>
+    <string name="title_activity_lstop">L Stop</string>
+    <string name="lbl_direction">Direction</string>
+    <string name="blank"></string>
+    <string name="lbl_stopname">Stop Name</string>
+    <string name="lbl_stationname">Station Name</string>
+    <string name="lbl_stationdescription">Station Description</string>
+    <string name="btn_mapstation">Map Station</string>
+    <string name="btn_getdirections">Get Directions</string>
+    <string name="title_activity_lstops">L Stops</string>
+</resources>

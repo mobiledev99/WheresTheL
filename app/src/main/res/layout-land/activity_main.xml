@@ -1,0 +1,97 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/tvCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesTwo"
+            android:text="@string/chicago_city" />
+
+        <TextView
+            android:id="@+id/lblDirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tvCity"
+            android:layout_alignLeft="@+id/tvCity"
+            android:layout_alignRight="@+id/tvCity"
+            android:layout_alignStart="@+id/tvCity"
+            android:layout_below="@+id/tvCity"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesTwo"
+            android:text="@string/rb_direction" />
+
+        <RadioGroup
+            android:id="@+id/rgDirectionGroup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvCity"
+            android:layout_marginTop="42dp"
+            android:labelFor="@string/rb_direction">
+
+            <RadioButton
+                android:id="@+id/rbNorth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_north" />
+
+            <RadioButton
+                android:id="@+id/rbSouth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_south" />
+
+            <RadioButton
+                android:id="@+id/rbEast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_east" />
+
+            <RadioButton
+                android:id="@+id/rbWest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_west" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/lblDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvCity"
+            android:layout_alignStart="@+id/tvCity"
+            android:layout_below="@+id/rgDirectionGroup"
+            android:layout_marginTop="64dp"
+            android:ems="@integer/ems12"
+            android:lines="@integer/numLinesTwo"
+            android:text="@string/spn_distance" />
+
+        <Spinner
+            android:id="@+id/spnDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_below="@+id/lblDistance"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/spinner_prompt"
+            android:entries="@array/distance_to_l"
+            android:prompt="@string/spinner_prompt" />
+
+    </RelativeLayout>
+</ScrollView>

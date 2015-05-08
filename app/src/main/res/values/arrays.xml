@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="distance_to_l">
+        <item>" "</item>
+        <item>.25</item>
+        <item>.5</item>
+        <item>.75</item>
+        <item>1.0</item>
+    </string-array>
+</resources>

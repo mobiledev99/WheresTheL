@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Direction"
+        android:id="@+id/lstop_list_item_direction"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/four_dp_padding" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Distance"
+        android:id="@+id/lstop_list_item_distance"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/lstop_list_item_direction"
+        android:padding="@dimen/four_dp_padding" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Station Name"
+        android:id="@+id/lstop_list_item_stationName"
+        android:layout_toLeftOf="@id/lstop_list_item_direction"
+        android:textStyle="bold"
+        android:paddingLeft="@dimen/four_dp_padding"
+        android:paddingRight="@dimen/four_dp_padding" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:id="@+id/lstop_list_item_stationDescriptiveName"
+        android:layout_below="@id/lstop_list_item_stationName"
+        android:layout_toLeftOf="@id/lstop_list_item_distance"
+        android:paddingLeft="@dimen/four_dp_padding"
+        android:paddingTop="@dimen/four_dp_padding"
+        android:paddingRight="@dimen/four_dp_padding" />
+</RelativeLayout>

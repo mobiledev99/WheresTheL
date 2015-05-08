@@ -1,0 +1,134 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/sixteen_dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblDirection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="@integer/ems12"
+                android:lines="@integer/numLinesTwo"
+                android:text="@string/lbl_direction" />
+
+            <TextView
+                android:id="@+id/tvDirection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ems="@integer/ems12"
+                android:lines="@integer/numLinesTwo"
+                android:text="@string/blank" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/sixteen_dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblStopName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="@integer/ems12"
+                android:lines="@integer/numLinesThree"
+                android:text="@string/lbl_stopname" />
+
+            <TextView
+                android:id="@+id/tvStopName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ems="@integer/ems12"
+                android:lines="@integer/numLinesThree"
+                android:text="@string/blank" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/sixteen_dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblStationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="@integer/ems12"
+                android:lines="@integer/numLinesThree"
+                android:text="@string/lbl_stationname" />
+
+            <TextView
+                android:id="@+id/tvStationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ems="@integer/ems12"
+                android:lines="@integer/numLinesThree"
+                android:text="@string/blank" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/sixteen_dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblStationDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="@integer/ems12"
+                android:lines="@integer/numLinesThree"
+                android:text="@string/lbl_stationdescription" />
+
+            <TextView
+                android:id="@+id/tvStationDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:ems="@integer/ems12"
+                android:lines="@integer/numLinesThree"
+                android:text="@string/blank" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/sixteen_dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnMapStation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btn_mapstation" />
+
+            <Button
+                android:id="@+id/btnGetDirections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btn_getdirections" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
