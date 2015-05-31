@@ -1,8 +1,10 @@
 package com.mobiledev.wheresthel;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
 /**
  * MainActivity displays the main selection page used to find a list of L stops based on
  * travel direction and a selected distance from the user
@@ -19,14 +28,33 @@ import android.widget.Toast;
  * @version %I%, %G%
  *
  */
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends WheresTheLActivity implements AdapterView.OnItemSelectedListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        LocationListener {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private RadioGroup rgDirectionGroup;
     private RadioButton rbNorth, rbSouth, rbEast, rbWest;
     private Spinner spnDistance;
 
+    private static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
+
+    private Location mLastLocation;
+
+    private GoogleApiClient mGoogleApiClient;
+
+    private boolean mRequestingLocationUpdates = false;
+    private LocationRequest mLocationRequest;
+
+    private static int UPDATGE_INTERVAL = 10000; // 10 sec
+    private static int FASTEST_INTERVAL = 5000; // 5 sec
+    private static int DISPLACEMENT = 10; // 10 meters
+
     public String direction;
     public String distance;
+
+    private LstopDatabase lStopDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,29 +109,53 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
         spnDistance.setOnItemSelectedListener(this);
 
-    }
+        //lStopDB = new LstopDatabase(this);
 
+        if(checkPlayServices()) {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            buildGoogleApiClient();
+            createLocationRequest();
         }
 
-        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public int getCurrentMenuId() {
+        return R.id.mainactivity;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        checkPlayServices();
+
+        if(mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
+            startLocationUpdates();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+
     }
 
     @Override
@@ -124,6 +176,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             that are going in the selected direction
         */
         if (direction != null && distance !=null) {
+            if(!mRequestingLocationUpdates) {
+                mRequestingLocationUpdates = true;
+                startLocationUpdates();
+            }
             listLStops();
         }
     }
@@ -137,8 +193,109 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
      * Call LStopListActivity to display the list of L stops
      */
     private void listLStops() {
+
         // Toast.makeText(this,"Direction: " + direction + "\nDistance: " + distance,Toast.LENGTH_LONG).show();
-        Intent listLStopsIntent = new Intent(this,LStopListActivity.class);
-        startActivity(listLStopsIntent);
+        LStopSearchTerms lStopSearchTerms = new LStopSearchTerms();
+
+        lStopSearchTerms.setCity("Chicago");
+        lStopSearchTerms.setDirection(direction);
+        lStopSearchTerms.setDistance(distance);
+
+        mRequestingLocationUpdates = false;
+        stopLocationUpdates();
+
+        if(mLastLocation != null) {
+
+            String myLatitude = Double.toString(mLastLocation.getLatitude());
+            String myLongitude = Double.toString(mLastLocation.getLongitude());
+
+            Log.i(TAG, "My latitude = " + myLatitude + " My longitude = " + myLongitude);
+
+            lStopSearchTerms.setLatitude(myLatitude);
+            lStopSearchTerms.setLongitude(myLongitude);
+
+            Intent listLStopsIntent = new Intent(this,LStopListActivity.class);
+            listLStopsIntent.putExtra(LStopSearchTerms.LSTOPSEARCHTERMS, lStopSearchTerms);
+            //listLStopsIntent.putExtra(LStopListFragment.LSTOPDATABASE, lStopDB);
+            startActivity(listLStopsIntent);
+
+        }
+        else {
+
+            Toast.makeText(this,"Couldn't get the location. Make sure location is enabled on the device",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void getLocation() {
+
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATGE_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+
+        if(resultCode != ConnectionResult.SUCCESS) {
+            if(GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            }
+            else {
+                Toast.makeText(getApplicationContext(),"This device is not supported.",Toast.LENGTH_LONG).show();
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    protected void startLocationUpdates() {
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        getLocation();
+        if(mRequestingLocationUpdates) {
+            startLocationUpdates();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+        Log.i(TAG, "Connection failed ConnectionResult.getErrorCode() = " + connectionResult.getErrorCode());
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mLastLocation = location;
+
+        getLocation();
     }
 }

@@ -16,6 +16,10 @@ public class LStopListActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new LStopListFragment();
+        //LstopDatabase lstopDatabase = (LstopDatabase) getIntent().getSerializableExtra(LStopListFragment.LSTOPDATABASE);
+        LStopSearchTerms lStopSearchTerms = (LStopSearchTerms) getIntent().getSerializableExtra(LStopSearchTerms.LSTOPSEARCHTERMS);
+
+        return LStopListFragment.newInstance(lStopSearchTerms);
+        //return new LStopListFragment();
     }
 }

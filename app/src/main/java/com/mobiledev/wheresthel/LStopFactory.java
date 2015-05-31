@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @version %I%, %G%
  *
  */
-public class LStopFactory {
+public class LStopFactory implements FetchLStops{
     private ArrayList<LStop> mLStops; // ArrayList of LStop objects
 
     private static LStopFactory sLStopFactory; // Singleton LStopFactory object reference
@@ -32,8 +32,8 @@ public class LStopFactory {
             l.setStop_name(i + 1 + "th");
             l.setStation_name(i + 1 + "th " + names[i]);
             l.setStation_descriptive_name(i + 1 + "th " + names[i] + " Station");
-            l.setLatitude(i + 47 + "");
-            l.setLongitude(i - 81 + "");
+            l.setLatitude(i + 41.795172 + "");
+            l.setLongitude(i - 87.618327 + "");
             mLStops.add(l);
         }
     }
@@ -58,7 +58,7 @@ public class LStopFactory {
      * Returns the ArrrayList of LStops
      * @return an ArrayList of LStop objects
      */
-    public ArrayList<LStop> getLStops() {
+    public ArrayList<LStop> fetchLStopsWithinDistance(LStopQueryValues queryValues) {
         return mLStops;
     }
 

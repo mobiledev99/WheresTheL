@@ -12,7 +12,7 @@ import java.io.Serializable;
  *     <li>The direction of the L stop</li>
  *     <li>The name of the L stop</li>
  *     <li>The name of the station</li>
- *     <li>A descriptive nme of the L stop</li>
+ *     <li>A descriptive name of the L stop</li>
  *     <li>The L stop's latitude</li>
  *     <li>The L stop's longitude</li>
  * </ul>

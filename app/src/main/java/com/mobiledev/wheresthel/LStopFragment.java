@@ -1,8 +1,11 @@
 package com.mobiledev.wheresthel;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,17 +36,20 @@ public class LStopFragment extends Fragment {
     private TextView stationDescription;
     private Button mapStation;
     private Button getDirections;
+    private LStopSearchTerms lStopSearchTerms;
+
 
 
     /**
      * Retrieves an LStop object from the bundle passed in when the fragment is created
      *
-     * @param savedInstanceState bubdle that contains the LStop object
+     * @param savedInstanceState bundle that contains the LStop object
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lStop = (LStop) getArguments().getSerializable(LSTOP);
+        lStopSearchTerms = (LStopSearchTerms) getArguments().getSerializable(LStopSearchTerms.LSTOPSEARCHTERMS);
     }
 
     @Override
@@ -74,14 +80,16 @@ public class LStopFragment extends Fragment {
      * @param lstop object to pass to the activity
      * @return a new instance of an LStopFragment
      */
-    public static LStopFragment newInstance(LStop lstop) {
+    public static LStopFragment newInstance(LStop lstop, LStopSearchTerms lStopSearchTerms) {
 
         Bundle args = new Bundle();
         args.putSerializable(LSTOP, lstop);
+        args.putSerializable(LStopSearchTerms.LSTOPSEARCHTERMS, lStopSearchTerms);
 
         LStopFragment fragment = new LStopFragment();
         fragment.setArguments(args);
 
         return fragment;
     }
+
 }

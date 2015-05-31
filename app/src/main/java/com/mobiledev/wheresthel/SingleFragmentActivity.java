@@ -17,7 +17,7 @@ import android.os.Bundle;
  * @version %I%, %G%
  *
  */
-public abstract class SingleFragmentActivity extends Activity {
+public abstract class SingleFragmentActivity extends WheresTheLActivity {
     protected abstract Fragment createFragment();
 
     @Override
@@ -35,5 +35,10 @@ public abstract class SingleFragmentActivity extends Activity {
                     .commit();
         }
 
+    }
+
+    @Override
+    public int getCurrentMenuId() {
+        return 0;
     }
 }

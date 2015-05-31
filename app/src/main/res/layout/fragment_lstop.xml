@@ -115,6 +115,7 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_mapstation"
             android:id="@+id/btnMapStation"
+            android:onClick="btnGetMapStationClicked"
             android:layout_weight="1" />
 
         <Button
@@ -122,6 +123,7 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_getdirections"
             android:id="@+id/btnGetDirections"
+            android:onClick="btnGetDirectionsClicked"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>
