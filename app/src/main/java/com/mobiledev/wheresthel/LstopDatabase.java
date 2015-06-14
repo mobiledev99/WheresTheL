@@ -35,6 +35,12 @@ public class LstopDatabase extends SQLiteAssetHelper implements Serializable, Fe
     public static final String STATION_DESCRIPTIVE_NAME = "STATION_DESCRIPTIVE_NAME";
     public static final String LATITUDE = "LATITUDE";
     public static final String LONGITUDE = "LONGITUDE";
+    public static final String SIN_LATITUDE_RAD = "SIN_LAT_RAD";
+    public static final String SIN_LONGITUDE_RAD = "SIN_LON_RAD";
+    public static final String COS_LATITUDE_RAD = "COS_LAT_RAD";
+    public static final String COS_LONGITUDE_RAD = "COS_LON_RAD";
+
+
 
     public LstopDatabase(Context context) {
 
@@ -50,13 +56,23 @@ public class LstopDatabase extends SQLiteAssetHelper implements Serializable, Fe
                 " AND (CAST(" + LONGITUDE + " AS DOUBLE) >= " + queryValues.getMinLon() +
                 " " + queryValues.getOrAnd() + " (CAST(" + LONGITUDE + " AS DOUBLE) <= " +
                 queryValues.getMaxLon() + "))";
-        String queryCircle = " AND acos(sin(" + queryValues.getSinLat() + ") * sin(CAST(" +
-                LATITUDE + " AS DOUBLE)) + cos(" + queryValues.getCosLat() + ") * cos(CAST(" +
-                LATITUDE + " AS DOUBLE)) * cos(CAST(" +
-                LONGITUDE + " AS DOUBLE) - " + queryValues.getCosLon() + ")) <= " +
+        String queryCircle = " AND (" + queryValues.getSinLat() + " * CAST(" +
+                SIN_LATITUDE_RAD + " AS DOUBLE) + " + queryValues.getCosLat() + " * " +
+                        "CAST(" +COS_LATITUDE_RAD + " AS DOUBLE) * (CAST(" + COS_LONGITUDE_RAD +
+                " AS DOUBLE) * " + queryValues.getCosLon() + " + CAST(" + SIN_LONGITUDE_RAD +
+                " AS DOUBLE) * " + queryValues.getSinLon() + ")) >= " +
                 queryValues.getAngularRadius();
 
-        return (innerSelect(sql + where + queryCircle));
+        String direction = " AND " + DIRECTION_ID + " = '"  + queryValues.direction + "'";
+
+//        String queryCircle = " AND acos(sin(" + queryValues.getSinLat() + ") * sin(CAST(" +
+//                LATITUDE + " AS DOUBLE)) + cos(" + queryValues.getCosLat() + ") * cos(CAST(" +
+//                LATITUDE + " AS DOUBLE)) * cos(CAST(" +
+//                LONGITUDE + " AS DOUBLE) - " + queryValues.getCosLon() + ")) <= " +
+//                queryValues.getAngularRadius();
+
+
+        return (innerSelect(sql + where + queryCircle + direction));
     }
 
     private ArrayList<LStop> innerSelect(String sql) {

@@ -69,9 +69,10 @@ public class LStopListFragment extends ListFragment {
         lStopQueryValues.setMaxLat(boundingCoordinates[1].getLatitudeInDegrees());
         lStopQueryValues.setMinLon(boundingCoordinates[0].getLongitudeInDegrees());
         lStopQueryValues.setMaxLon(boundingCoordinates[1].getLongitudeInDegrees());
-        lStopQueryValues.setSinLat(myLocation.getLatitudeInDegrees());
-        lStopQueryValues.setCosLat(myLocation.getLatitudeInDegrees());
-        lStopQueryValues.setCosLon(myLocation.getLongitudeInDegrees());
+        lStopQueryValues.setSinLat(Math.sin(myLocation.getLatitudeInRadians()));
+        lStopQueryValues.setSinLon(Math.sin(myLocation.getLongitudeInRadians()));
+        lStopQueryValues.setCosLat(Math.cos(myLocation.getLatitudeInRadians()));
+        lStopQueryValues.setCosLon(Math.cos(myLocation.getLongitudeInRadians()));
 
         double angularRadius = new BigDecimal(distance/ earthRadius).setScale(6, BigDecimal.ROUND_HALF_UP).doubleValue();
 
@@ -174,9 +175,9 @@ public class LStopListFragment extends ListFragment {
 
             ArrayList<LStop> lStops = new ArrayList<LStop>();
 
-            lStops = LStopFactory.get(getActivity()).fetchLStopsWithinDistance(params[0]);
+            //lStops = LStopFactory.get(getActivity()).fetchLStopsWithinDistance(params[0]);
             try {
-            //    lStops = lStopDB.fetchLStopsWithinDistance(params[0]);
+                lStops = lStopDB.fetchLStopsWithinDistance(params[0]);
             } catch (Exception e) {
                 e.printStackTrace();
             }

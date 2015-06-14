@@ -77,7 +77,7 @@ public class LStopActivity extends SingleFragmentActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mode = "d";
-                dialog.cancel();
+                dialog.dismiss();
             }
         });
         // set negative button: Walking w
@@ -85,7 +85,7 @@ public class LStopActivity extends SingleFragmentActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mode = "w";
-                dialog.cancel();
+                dialog.dismiss();
             }
         });
         // set neutral button: Bicycling b
@@ -93,7 +93,7 @@ public class LStopActivity extends SingleFragmentActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mode = "b";
-                dialog.cancel();
+                dialog.dismiss();
             }
         });
 

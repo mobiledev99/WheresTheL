@@ -12,6 +12,7 @@ public class LStopQueryValues {
     double minLon;
     double maxLon;
     double sinLat;
+    double sinLon;
     double cosLat;
     double cosLon;
     double angularRadius;
@@ -78,6 +79,14 @@ public class LStopQueryValues {
 
     public void setSinLat(double sinLat) {
         this.sinLat = sinLat;
+    }
+
+    public double getSinLon() {
+        return sinLon;
+    }
+
+    public void setSinLon(double sinLon) {
+        this.sinLon = sinLon;
     }
 
     public double getCosLat() {
